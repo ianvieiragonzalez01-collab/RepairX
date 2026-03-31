@@ -119,19 +119,25 @@ export default function Repairs() {
                     <div className={cn(status.bg, status.color, "p-2 rounded-lg")}>
                       <status.icon size={20} />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">#{repair.id.slice(-5)}</span>
-                      <button 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setDeleteConfirmId(repair.id);
-                        }}
-                        className="p-1.5 hover:bg-red-50 rounded-lg text-slate-300 hover:text-red-600 transition-colors"
-                        title="Excluir Serviço"
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                    <div className="flex flex-col items-end gap-1">
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <Clock size={10} />
+                        {repair.estimatedTime || 'N/A'}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">#{repair.id.slice(-5)}</span>
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setDeleteConfirmId(repair.id);
+                          }}
+                          className="p-1.5 hover:bg-red-50 rounded-lg text-slate-300 hover:text-red-600 transition-colors"
+                          title="Excluir Serviço"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                   

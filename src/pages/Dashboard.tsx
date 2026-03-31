@@ -6,7 +6,9 @@ import {
   Clock, 
   TrendingUp, 
   AlertCircle,
-  Plus
+  Plus,
+  ShieldCheck,
+  Zap
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { StorageService } from '../services/storage';
@@ -60,6 +62,46 @@ export default function Dashboard() {
             <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
           </div>
         ))}
+      </div>
+
+      {/* Quick Access */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Link 
+          to="/verificador-imei"
+          className="group bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4"
+        >
+          <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+            <ShieldCheck size={24} />
+          </div>
+          <div>
+            <h3 className="font-bold text-slate-900">Verificador de IMEI</h3>
+            <p className="text-xs text-slate-500">Consultar histórico do aparelho</p>
+          </div>
+        </Link>
+        <Link 
+          to="/novo-servico"
+          className="group bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4"
+        >
+          <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all">
+            <Zap size={24} />
+          </div>
+          <div>
+            <h3 className="font-bold text-slate-900">Smart Service</h3>
+            <p className="text-xs text-slate-500">Novo serviço com tempo estimado</p>
+          </div>
+        </Link>
+        <Link 
+          to="/clientes"
+          className="group bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex items-center gap-4"
+        >
+          <div className="w-12 h-12 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-all">
+            <Users size={24} />
+          </div>
+          <div>
+            <h3 className="font-bold text-slate-900">Base de Clientes</h3>
+            <p className="text-xs text-slate-500">Gerenciar contatos e histórico</p>
+          </div>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

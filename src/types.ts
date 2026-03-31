@@ -20,6 +20,8 @@ export interface Repair {
     touchWorks: boolean;
   };
   status: 'pending' | 'in-progress' | 'waiting-parts' | 'finished' | 'delivered';
+  imei?: string;
+  estimatedTime?: string; // e.g., "2h", "1d"
   budget: {
     partsCost: number;
     laborCost: number;

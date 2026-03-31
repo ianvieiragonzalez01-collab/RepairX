@@ -10,7 +10,8 @@ import {
   AlertTriangle,
   Wrench,
   Camera,
-  FileText
+  FileText,
+  ShieldCheck
 } from 'lucide-react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -142,6 +143,24 @@ export default function RepairDetails() {
                   <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Data de Entrada</h4>
                   <p className="text-slate-900 font-medium">{new Date(repair.entryDate).toLocaleDateString()} às {new Date(repair.entryDate).toLocaleTimeString()}</p>
                 </div>
+                {repair.imei && (
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">IMEI</h4>
+                    <div className="flex items-center gap-2 text-slate-900 font-medium">
+                      <ShieldCheck size={16} className="text-blue-600" />
+                      {repair.imei}
+                    </div>
+                  </div>
+                )}
+                {repair.estimatedTime && (
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Tempo Estimado</h4>
+                    <div className="flex items-center gap-2 text-slate-900 font-medium">
+                      <Clock size={16} className="text-blue-600" />
+                      {repair.estimatedTime}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {repair.diagnosis && (

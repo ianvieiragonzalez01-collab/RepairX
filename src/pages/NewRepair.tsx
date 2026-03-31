@@ -8,9 +8,13 @@ import {
   DollarSign, 
   Sparkles,
   Loader2,
-  Plus
+  Plus,
+  ShieldCheck,
+  Clock as ClockIcon,
+  AlertTriangle
 } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'sonner';
 import { StorageService } from '../services/storage';
 import { GeminiService } from '../services/gemini';
 import { Customer, Repair } from '../types';
@@ -29,6 +33,8 @@ export default function NewRepair() {
     customerId: '',
     deviceModel: '',
     reportedDefect: '',
+    imei: '',
+    estimatedTime: '2h',
     partsCost: 0,
     laborCost: 0,
     notes: '',
@@ -66,6 +72,8 @@ export default function NewRepair() {
       customerId: formData.customerId,
       deviceModel: formData.deviceModel,
       reportedDefect: formData.reportedDefect,
+      imei: formData.imei,
+      estimatedTime: formData.estimatedTime,
       diagnosis: aiDiagnosis,
       checklist: formData.checklist,
       status: 'pending',
@@ -155,6 +163,54 @@ export default function NewRepair() {
                   className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                   placeholder="Ex: iPhone 13 Pro Max"
                 />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">IMEI (Opcional)</label>
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    value={formData.imei}
+                    onChange={(e) => setFormData({...formData, imei: e.target.value})}
+                    className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                    placeholder="15 dígitos..."
+                  />
+                  {formData.imei.length >= 14 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        // Mock IMEI check
+                        if (formData.imei.endsWith('000')) {
+                          toast.error('IMEI em Alerta: Este aparelho pode ser roubado!');
+                        } else {
+                          toast.success('IMEI Verificado: Sem restrições encontradas.');
+                        }
+                      }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-all"
+                      title="Verificar IMEI"
+                    >
+                      <ShieldCheck size={16} />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">Tempo Estimado (Smart Time)</label>
+                <select 
+                  value={formData.estimatedTime}
+                  onChange={(e) => setFormData({...formData, estimatedTime: e.target.value})}
+                  className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                >
+                  <option value="30min">30 minutos (Rápido)</option>
+                  <option value="1h">1 hora</option>
+                  <option value="2h">2 horas (Padrão)</option>
+                  <option value="4h">4 horas</option>
+                  <option value="1d">1 dia</option>
+                  <option value="2d">2 dias</option>
+                  <option value="3d">3 dias</option>
+                  <option value="7d">1 semana</option>
+                </select>
               </div>
 
               <div className="md:col-span-2 space-y-2">

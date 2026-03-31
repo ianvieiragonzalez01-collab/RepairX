@@ -13,7 +13,8 @@ import {
   X,
   CheckCircle2,
   AlertTriangle,
-  Info
+  Info,
+  ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Toaster } from 'sonner';
@@ -27,6 +28,7 @@ import Finance from './pages/Finance';
 import NewRepair from './pages/NewRepair';
 import RepairDetails from './pages/RepairDetails';
 import CustomerDetails from './pages/CustomerDetails';
+import ImeiVerifier from './pages/ImeiVerifier';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
 
@@ -172,6 +174,7 @@ export default function App() {
               <SidebarRouteItem icon={LayoutDashboard} label="Dashboard" to="/" />
               <SidebarRouteItem icon={Users} label="Clientes" to="/clientes" />
               <SidebarRouteItem icon={Wrench} label="Serviços" to="/servicos" />
+              <SidebarRouteItem icon={ShieldCheck} label="Verificador de IMEI" to="/verificador-imei" />
               <SidebarRouteItem icon={DollarSign} label="Financeiro" to="/financeiro" />
             </nav>
 
@@ -323,6 +326,7 @@ export default function App() {
               <Route path="/clientes" element={<Customers />} />
               <Route path="/cliente/:id" element={<CustomerDetails />} />
               <Route path="/servicos" element={<Repairs />} />
+              <Route path="/verificador-imei" element={<ImeiVerifier />} />
               <Route path="/financeiro" element={<Finance />} />
               <Route path="/novo-servico" element={<NewRepair />} />
               <Route path="/servico/:id" element={<RepairDetails />} />
