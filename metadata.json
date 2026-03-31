@@ -1,0 +1,7 @@
+{
+  "name": "FixMaster Pro",
+  "description": "Sistema completo para gestão de assistência técnica de celulares, com diagnósticos, orçamentos e controle financeiro.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
